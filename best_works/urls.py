@@ -4,22 +4,15 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path(
-        "jet/",
-        include(
-            "jet.urls",
-            "jet",
-        ),
-    ),
+    path("jet/", include("jet.urls", "jet")),
     path(
         "jet/dashboard/",
-        include(
-            "jet.dashboard.urls",
-            "jet-dashboard",
-        ),
+        include("jet.dashboard.urls", "jet-dashboard"),
     ),
+    path("", include("works.urls", namespace="works")),
     path("admin/", admin.site.urls),
 ]
+
 if settings.DEBUG:
     urlpatterns += static(
         settings.MEDIA_URL,
