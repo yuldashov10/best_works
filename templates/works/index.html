@@ -1,15 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
-  <div class="uk-position-relative uk-visible@s">
-    <img src="https://dummyimage.com/1800x1200/b06023/43444f.png"
-         width="1800"
-         height="1200"
-         alt="">
-  </div>
   <div class="uk-block"
        uk-parallax="blur: 5; sepia: 50;"
        style="overflow-wrap: break-word;
               word-wrap: break-word">
-    <h2 class="uk-heading-xlarge uk-text-left uk-text-capitalize uk-hidden@s">Делаем как для себя</h2>
+    <div class="uk-child-width uk-text-center uk-hidden@s" uk-grid>
+      <div class="uk-animation-toggle " tabindex="0">
+        <img class="uk-animation-stroke uk-animation"
+             src="static/svg/strokes.svg"
+             width="300"
+             height="300"
+             alt="bulldozer"
+             uk-svg="stroke-animation: true">
+      </div>
+    </div>
+    <div class="uk-child-width uk-text-center uk-visible@s" uk-grid>
+      <div class="uk-animation-toggle" tabindex="0">
+        <img class="uk-animation-stroke uk-animation"
+             src="static/svg/strokes.svg"
+             width="300"
+             height="300"
+             alt="bulldozer"
+             uk-svg="stroke-animation: true">
+      </div>
+    </div>
+    <h2 class="uk-heading-xlarge uk-text-center uk-text-capitalize uk-hidden@s">Создаём комфорт</h2>
+    <h2 class="uk-heading-3xlarge uk-text-center uk-text-capitalize uk-visible@s">Создаём комфорт</h2>
   </div>
-  {% enblock %}
+{% endblock %}
