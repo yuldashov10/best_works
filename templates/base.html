@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ru">
+  {% include 'includes/head.html' %}
+  <body>
+    {% include 'includes/navbar.html' %}
+    <main class="uk-section uk-padding-remove-top">
+      <div class="uk-container">
+        {% block content %}{% endblock %}
+      </div>
+    </main>
+  </body>
+  <footer>
+    {% include 'includes/footer.html' %}
+  </footer>
+</html>

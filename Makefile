@@ -11,6 +11,9 @@ dj-run:
 dj-collect:
 	python manage.py collectstatic
 
+dj-lint:
+	djlint --indent=2 --reformat templates/
+
 # Commands for working with a virtual environment
 venv310:
 	python3.10 -m venv .venv
