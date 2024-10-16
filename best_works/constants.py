@@ -1,0 +1,1 @@
+USER_NAME_LEN: int = 60

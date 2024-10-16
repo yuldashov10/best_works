@@ -3,6 +3,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
+from best_works.views import AboutPageView, ContactPageView
+
 urlpatterns = [
     path("jet/", include("jet.urls", "jet")),
     path(
@@ -10,9 +12,10 @@ urlpatterns = [
         include("jet.dashboard.urls", "jet-dashboard"),
     ),
     path("", include("works.urls", namespace="works")),
+    path("about_us/", AboutPageView.as_view(), name="about_us"),
+    path("contacts/", ContactPageView.as_view(), name="contacts"),
     path("admin/", admin.site.urls),
 ]
-
 if settings.DEBUG:
     urlpatterns += static(
         settings.MEDIA_URL,
