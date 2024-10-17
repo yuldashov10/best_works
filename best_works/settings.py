@@ -53,6 +53,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "core.context_processors.get_all_data_about_company",
             ],
         },
     },
@@ -93,6 +94,8 @@ TIME_ZONE = "Europe/Moscow"
 USE_I18N = True
 USE_TZ = True
 
+TIME_INPUT_FORMATS = ("%H:%M",)
+
 STATIC_URL = "static/"
 
 if DEBUG:
@@ -104,3 +107,12 @@ MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": BASE_DIR / "cache_data",
+    }
+}
+
+CONTEXT_DATA_CACHE_TIME_SECOND: int = 900

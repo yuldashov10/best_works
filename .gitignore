@@ -5,6 +5,7 @@
 !**/migrations/__init__.py
 static/
 staticfiles/
+data/
 
 #########################
 ##### PyCharm+all
