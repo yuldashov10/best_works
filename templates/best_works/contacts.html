@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+<title>
+  {% block title %}Best Works | Контакты{% endblock %}
+</title>
+{% block content %}
+  <div class="uk-section">
+    <div class="uk-container uk-container-small">
+      <h1 class="uk-heading-line uk-text-center uk-margin-remove-top uk-hidden@m">
+        <span>Свяжитесь с нами</span>
+      </h1>
+      <h1 class="uk-heading-line uk-heading-medium uk-text-center uk-margin-remove-top uk-visible@m">
+        <span>Свяжитесь с нами</span>
+      </h1>
+      {% if messages %}
+        <div class="uk-alert-success" uk-alert>
+          <a class="uk-alert-close" uk-close></a>
+          {% for message in messages %}<h3>{{ message.message }}</h3>{% endfor %}
+        </div>
+      {% endif %}
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="uk-margin">
+          <label class="uk-form-label" for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
+          <div class="uk-form-controls">{{ form.name }}</div>
+        </div>
+        <div class="uk-margin">
+          <label class="uk-form-label" for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+          <div class="uk-form-controls">{{ form.email }}</div>
+        </div>
+        <div class="uk-margin">
+          <label class="uk-form-label" for="{{ form.text.id_for_label }}">{{ form.text.label }}</label>
+          <div class="uk-form-controls">{{ form.text }}</div>
+        </div>
+        <div class="uk-margin">
+          <button class="uk-button uk-button-secondary" type="submit">Отправить сообщение</button>
+        </div>
+      </form>
+      <div id="onTheMap" class="uk-margin-large">
+        <h3 class="uk-heading-bullet">Найдите нас на карте</h3>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2173.420761645706!2d40.98364217696048!3d56.992979973568325!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x414d1416fb00e86d%3A0xb727c43f05bef04f!2sUlitsa%20Smirnova%2C%2021%2C%20Ivanovo%2C%20Ivanovskaya%20oblast&#39;%2C%20153000!5e0!3m2!1sen!2sru!4v1729168004097!5m2!1sen!2sru"
+                width="100%"
+                height="400"
+                frameborder="0"
+                style="border:0"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+{% endblock %}

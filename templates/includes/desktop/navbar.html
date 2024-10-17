@@ -5,24 +5,28 @@
         <div uk-navbar class="uk-visible@m uk-text-bolder">
           <div class="uk-navbar-left">
             <ul class="uk-navbar-nav">
-              <li class="uk-active">
-                <a href="#">Главная</a>
+              {% url 'works:home_page' as url %}
+              <li class="{% if request.path == url %}uk-active{% endif %}">
+                <a href="{% url 'works:home_page' %}">Главная {{ url_name }}</a>
               </li>
-              <li>
-                <a href="#">О Нас</a>
+              {% url 'about_us' as url %}
+              <li class="{% if request.path == url %}uk-active{% endif %}">
+                <a href="{% url 'about_us' %}">О Нас</a>
               </li>
-              <li>
-                <a href="#">Услуги</a>
+              {% url 'works:services' as url %}
+              <li class="{% if request.path == url %}uk-active{% endif %}">
+                <a href="{% url 'works:services' %}">Услуги</a>
               </li>
-              <li>
-                <a href="#">Контакты</a>
+              {% url 'contacts' as url %}
+              <li class="{% if request.path == url %}uk-active{% endif %}">
+                <a href="{% url 'contacts' %}">Контакты</a>
               </li>
             </ul>
           </div>
           <div class="uk-navbar-center">
             <div class="uk-panel uk-padding uk-background-secondary">
               <a class="uk-logo uk-text-middle uk-text-uppercase uk-text-warning"
-                 href="#">Best Works</a>
+                 href="{% url 'works:home_page' %}">Best Works</a>
             </div>
           </div>
           <div class="uk-navbar-right">

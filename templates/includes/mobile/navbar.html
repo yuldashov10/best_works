@@ -13,7 +13,7 @@
       </div>
       <div class="uk-navbar-center">
         <a class="uk-logo uk-text-bold uk-text-uppercase uk-text-warning uk-text-bottom"
-           href="#">Best Works</a>
+           href="{% url 'works:home_page' %}">Best Works</a>
       </div>
       <div class="uk-navbar-right">
         <a class="uk-button  uk-button-small uk-margin-small-right"
@@ -26,18 +26,25 @@
 <div id="mobile-navbar" uk-offcanvas="overlay: true">
   <div class="uk-offcanvas-bar uk-flex uk-flex-column">
     <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
-      <li class="uk-active">
-        <a href="#">Главная</a>
+      {% url 'works:home_page' as url %}
+      <li class="{% if request.path == url %}uk-active{% endif %}">
+        <a href="{% url 'works:home_page' %}">Главная</a>
       </li>
-      <li>
-        <a href="#">О Нас</a>
+      {% url 'about_us' as url %}
+      <li class="{% if request.path == url %}uk-active{% endif %}">
+        <a href="{% url 'about_us' %}">О Нас</a>
       </li>
-      <li>
-        <a href="#">Услуги</a>
+      {% url 'works:services' as url %}
+      <li class="{% if request.path == url %}uk-active{% endif %}">
+        <a href="{% url 'works:services' %}">Услуги</a>
       </li>
       <li class="uk-nav-divider"></li>
-      <li>
-        <a href="#"><span class="uk-margin-small-right uk-text-warning" uk-icon="icon: phone"></span>Контакты</a>
+      {% url 'contacts' as url %}
+      <li class="{% if request.path == url %}uk-active{% endif %}">
+        <a href="{% url 'contacts' %}">
+          <span class="uk-margin-small-right uk-text-warning" uk-icon="icon: phone"></span>
+          Контакты
+        </a>
       </li>
     </ul>
     <ul class="uk-navbar-nav">

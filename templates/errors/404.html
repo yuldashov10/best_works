@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+<title>
+  {% block title %}Best Works | Страница не найдена{% endblock %}
+</title>
+{% block content %}
+  <div class="uk-section uk-flex uk-flex-middle uk-text-center"
+       style="height: 100vh">
+    <div class="uk-width-1-1">
+      <h1 class="uk-heading-3xlarge uk-text-warning">404</h1>
+      <p class="uk-text-large">Похоже, эта страница сбежала на ремонт!</p>
+      <p class="uk-text-lead">Но не переживайте, мы поможем Вам найти дорогу</p>
+      <a href="{% url 'works:home_page' %}"
+         class="uk-button uk-button-secondary uk-button-large"
+         role="button">Вернуться на главную</a>
+    </div>
+  </div>
+{% endblock %}

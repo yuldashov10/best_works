@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+<title>
+  {% block title %}Best Works | О Нас{% endblock %}
+</title>
+{% block content %}
+  <div class="uk-section uk-section-default">
+    <div class="uk-container">
+      <h2 class="uk-heading-line">
+        <span>О нас</span>
+      </h2>
+      <div class="uk-grid-match uk-child-width-1-2@m uk-margin-large" uk-grid>
+        <div>
+          <div class="uk-overflow-hidden">
+            <img src="https://dummyimage.com/1280x720/b06023/43444f.png"
+                 alt="О компании"
+                 uk-scrollspy="cls: uk-animation-kenburns; repeat: true"
+                 class="uk-width-1-1">
+          </div>
+        </div>
+        <div>
+          <p class="uk-text-lead">
+            Мы уже более 15 лет занимаемся предоставлением высококачественных услуг в строительстве и ремонте. Мы гордимся своей репутацией надежного партнера для наших клиентов.
+          </p>
+          <p>
+            С самого начала мы сосредоточились на высоких стандартах работы, что позволило нам заслужить доверие и признание на рынке. Наши специалисты обладают обширным опытом и применяют современные технологии для достижения наилучших результатов!
+          </p>
+        </div>
+      </div>
+      <h3 class="uk-heading-bullet">Наша команда</h3>
+      <div class="uk-grid-match uk-child-width-1-3@m uk-text-center"
+           uk-grid
+           uk-scrollspy="cls: uk-animation-scale-up; target: .uk-card; delay: 150;">
+        <div>
+          <div class="uk-card uk-card-default uk-card-body">
+            <img class="uk-border-circle"
+                 width="120"
+                 height="120"
+                 src="https://dummyimage.com/120x120/b06023/43444f.png"
+                 alt="Команда 1">
+            <h4 class="uk-card-title">Антон Сергеев</h4>
+            <p>Директор</p>
+          </div>
+        </div>
+        <div>
+          <div class="uk-card uk-card-default uk-card-body">
+            <img class="uk-border-circle"
+                 width="120"
+                 height="120"
+                 src="https://dummyimage.com/120x120/b06023/43444f.png"
+                 alt="Команда 2">
+            <h4 class="uk-card-title">Мария Петрова</h4>
+            <p>Менеджер проектов</p>
+          </div>
+        </div>
+        <div>
+          <div class="uk-card uk-card-default uk-card-body">
+            <img class="uk-border-circle"
+                 width="120"
+                 height="120"
+                 src="https://dummyimage.com/120x120/b06023/43444f.png"
+                 alt="Команда 3">
+            <h4 class="uk-card-title">Иван Сидоров</h4>
+            <p>Главный инженер</p>
+          </div>
+        </div>
+      </div>
+      <h3 class="uk-heading-bullet">Наши достижения</h3>
+      <div class="uk-grid-match uk-child-width-1-3@m uk-text-center"
+           uk-grid
+           uk-scrollspy="cls: uk-animation-scale-down; target: .uk-card; delay: 200; repeat: true;">
+        <div>
+          <div class="uk-card uk-card-default uk-card-body">
+            <h4 class="uk-card-title">15 лет опыта</h4>
+            <p>Мы успешно реализовали сотни проектов и продолжаем развиваться каждый день.</p>
+          </div>
+        </div>
+        <div>
+          <div class="uk-card uk-card-default uk-card-body">
+            <h4 class="uk-card-title">Более 1000 клиентов</h4>
+            <p>Довольные клиенты – наш главный приоритет. Мы всегда стремимся превзойти их ожидания.</p>
+          </div>
+        </div>
+        <div>
+          <div class="uk-card uk-card-default uk-card-body">
+            <h4 class="uk-card-title">Современные технологии</h4>
+            <p>Мы применяем передовые решения и материалы для долговечных и качественных проектов.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

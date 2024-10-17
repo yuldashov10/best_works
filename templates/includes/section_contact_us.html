@@ -1,9 +1,11 @@
-<div class="uk-margin-large-top uk-text-center">
+<div class="uk-margin-large-top uk-text-center"
+     uk-scrollspy="cls: uk-animation-shake; delay: 400; repeat: true">
   <h2 class="uk-heading-line">
     <span>Есть вопросы?</span>
   </h2>
   <p>Свяжитесь с нами!</p>
   <p>
-    <a href="#" class="uk-button uk-button-secondary uk-text-uppercase">Связаться с нами</a>
+    <a href="{% url 'contacts' %}"
+       class="uk-button uk-button-secondary uk-button-large uk-text-uppercase">Связаться с нами</a>
   </p>
 </div>
