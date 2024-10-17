@@ -1,7 +1,8 @@
 from django.db import models
 from easy_thumbnails.fields import ThumbnailerImageField
 
-from core.models import CreatedAtAndUpdatedAtMixin
+from core.mixins import CreatedAtAndUpdatedAtMixin
+from core.validators import UploadAndRenameImage
 from works.constants import (
     NULL_BLANK,
     SERVICE_PREVIEW_ALT_TEXT_LEN,
@@ -21,7 +22,7 @@ class Service(CreatedAtAndUpdatedAtMixin):
         "Описание",
     )
     preview = ThumbnailerImageField(
-        upload_to="services/",
+        upload_to=UploadAndRenameImage("services/"),
         resize_source=dict(
             size=SERVICE_PREVIEW_SIZE,
             sharpen=True,

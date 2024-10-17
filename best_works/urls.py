@@ -3,7 +3,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
-from best_works.views import AboutPageView, ContactPageView
+from core.views import (
+    AboutPageView,
+    BadRequestView,
+    ContactPageView,
+    CsrfFailureView,
+    PageNotFoundView,
+)
 
 urlpatterns = [
     path("jet/", include("jet.urls", "jet")),
@@ -26,6 +32,7 @@ if settings.DEBUG:
         document_root=settings.STATIC_ROOT,
     )
 
-# handler404 = "views.func_name_for_404"
-# handler403 = "views.func_name_for_403"
-# handler500 = "views.func_name_for_500"
+handler400 = BadRequestView.as_view()
+handler403 = CsrfFailureView.as_view()
+handler404 = PageNotFoundView.as_view()
+handler500 = "core.views.internal_server_error"

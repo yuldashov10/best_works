@@ -24,7 +24,6 @@ PROJECT_APPS = [
     "core",
     "works",
     "telegram",
-    "best_works",
 ]
 
 INSTALLED_APPS += PROJECT_APPS

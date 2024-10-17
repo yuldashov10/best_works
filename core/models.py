@@ -1,15 +1,29 @@
 from django.db import models
 
+from core.constants import USER_NAME_LEN
+from core.mixins import CreatedAtAndUpdatedAtMixin
 
-class CreatedAtAndUpdatedAtMixin(models.Model):
-    created_at = models.DateTimeField(
-        "Дата создания",
-        auto_now=True,
+
+class Contact(CreatedAtAndUpdatedAtMixin):
+    name = models.CharField(
+        "Ваше Имя",
+        max_length=USER_NAME_LEN,
     )
-    updated_at = models.DateTimeField(
-        "Дата обновления",
-        auto_now_add=True,
+    email = models.EmailField(
+        "Ваш адрес электронной почты",
+    )
+    text = models.TextField(
+        "Сообщение",
     )
 
     class Meta:
-        abstract = True
+        verbose_name = "Контакт"
+        verbose_name_plural = "Контакты"
+        ordering = ("-created_at",)
+
+    def __str__(self) -> str:
+        return str(self.name)
+
+
+class SocialNetwork(models.Model):
+    pass
