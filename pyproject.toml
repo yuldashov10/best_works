@@ -20,6 +20,7 @@ easy-thumbnails = "^2.10"
 black = "^24.8.0"
 isort = "^5.13.2"
 flake8 = "^7.1.1"
+flake8-pyproject = "^1.2.3"
 djlint = "^1.34.2"
 mypy = "^1.11.2"
 pylint = "^3.2.6"
@@ -40,8 +41,8 @@ line-length = 79
 extend-ignore = ["E203"]
 exclude = [
     ".git/",
-    "__pycache__/",
-    "migrations/",
+    "**/__pycache__/",
+    "**/migrations/",
     "manage.py",
     "settings.py",
     "env/",
@@ -61,15 +62,13 @@ R503 = true
 R504 = true
 R505 = true
 
-[tool.flake8.per-file-ignores]
-"*/settings.py" = "E501"
 
 [tool.black]
 line-length = 79
 include = '\.pyi?$'
 extend-exclude = '''
 /(
-    migrations
+  | migrations
   | __pycache__
   | .pytest_cache
   | .vscode

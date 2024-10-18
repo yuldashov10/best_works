@@ -6,6 +6,7 @@
 static/
 staticfiles/
 data/
+cache_data/
 
 #########################
 ##### PyCharm+all

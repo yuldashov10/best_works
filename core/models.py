@@ -1,15 +1,17 @@
-from datetime import time
 from typing import Callable
-from wsgiref.handlers import format_date_time
 
 from django.core.exceptions import ValidationError
 from django.db import models
+from easy_thumbnails.fields import ThumbnailerImageField
 
 from core.constants import (
+    ABOUT_IMAGE_QUALITY_PERCENT,
+    ABOUT_IMAGE_SIZE,
     BUILDING_NAME_LEN,
     CITY_NAME_LEN,
     COMPANY_NAME_LEN,
     COMPANY_PHONE_NUMBER_LEN,
+    NULL_BLANK,
     SOCIAL_NETWORK_CHOICES,
     SOCIAL_NETWORK_ICON_CLASS_LEN,
     SOCIAL_NETWORK_NAME_LEN,
@@ -19,8 +21,11 @@ from core.constants import (
     USER_NAME_LEN,
     WEEKDAYS_LEN,
 )
-from core.mixins import CreatedAtAndUpdatedAtMixin
-from core.validators import PhoneNumberRussianFormatValidator
+from core.mixins import AltTextForImageMixin, CreatedAtAndUpdatedAtMixin
+from core.validators import (
+    PhoneNumberRussianFormatValidator,
+    UploadAndRenameImage,
+)
 
 
 class Contact(CreatedAtAndUpdatedAtMixin):
@@ -79,8 +84,8 @@ class Company(models.Model):
     ]
 
     class Meta:
-        verbose_name = "Компания"
-        verbose_name_plural = "Компании"
+        verbose_name = "О компании"
+        verbose_name_plural = "О компании"
 
     def __str__(self) -> str:
         return str(self.name)
@@ -116,6 +121,12 @@ class SocialNetwork(models.Model):
             "Укажите UIkit CSS-класс для "
             "значка -> https://getuikit.com/docs/icon#library"
         ),
+    )
+    style_class = models.CharField(
+        "Класс иконок",
+        max_length=SOCIAL_NETWORK_ICON_CLASS_LEN,
+        **NULL_BLANK,
+        help_text="Здесь Вы можете перечислить UIkit CSS-классы через пробел",
     )
 
     class Meta:
@@ -197,3 +208,34 @@ class OpeningHour(models.Model):
 
     def __str__(self) -> str:
         return str(self.weekdays)
+
+
+class About(AltTextForImageMixin):
+    image = ThumbnailerImageField(
+        upload_to=UploadAndRenameImage("projects/"),
+        resize_source=dict(
+            size=ABOUT_IMAGE_SIZE,
+            sharpen=True,
+            quality=ABOUT_IMAGE_QUALITY_PERCENT,
+        ),
+        verbose_name="Изображение",
+    )
+    main_text = models.TextField(
+        "Основной текст о нас",
+    )
+    sub_text = models.TextField(
+        "Дополнительный текст о нас",
+        **NULL_BLANK,
+    )
+
+    class Meta:
+        verbose_name = "Страница о нас"
+        verbose_name_plural = "Страница о нас"
+        ordering = ("-pk",)
+
+    @property
+    def image_alt_text(self) -> str:
+        return self.alt_text or f"Картинка #{self.pk}"
+
+    def __str__(self) -> str:
+        return f"О нас информация #{self.pk}"

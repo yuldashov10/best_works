@@ -1,15 +1,31 @@
-from http import HTTPStatus
-
+from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from django.views.generic import CreateView, TemplateView
 
 from core.forms import ContactForm
+from core.models import About
+from works.models import Achievement, Employee
 
 
+@method_decorator(
+    cache_page(settings.ABOUT_PAGE_CACHE_SECOND),
+    name="dispatch",
+)
 class AboutPageView(TemplateView):
     template_name = "best_works/about.html"
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+
+        data["about_us"] = About.objects.first()
+        data["employees"] = Employee.objects.all()
+        data["achievements"] = Achievement.objects.all()
+
+        return data
 
 
 class ContactPageView(SuccessMessageMixin, CreateView):

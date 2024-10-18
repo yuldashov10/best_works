@@ -43,3 +43,12 @@ BUILDING_NAME_LEN: int = 30
 COMPANY_NAME_LEN: int = 60
 COMPANY_PHONE_NUMBER_LEN: int = 30
 WEEKDAYS_LEN: int = 30
+
+NULL_BLANK: dict[str, bool] = {
+    "null": True,
+    "blank": True,
+}
+ABOUT_IMAGE_SIZE: tuple[int, int] = (1280, 720)
+ABOUT_IMAGE_QUALITY_PERCENT: int = 95
+
+ALT_TEXT_LEN: int = 20

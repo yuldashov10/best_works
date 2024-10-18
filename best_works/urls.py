@@ -2,6 +2,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
+from django.views.decorators.cache import cache_page
 
 from core.views import (
     AboutPageView,
@@ -18,7 +19,11 @@ urlpatterns = [
         include("jet.dashboard.urls", "jet-dashboard"),
     ),
     path("", include("works.urls", namespace="works")),
-    path("about_us/", AboutPageView.as_view(), name="about_us"),
+    path(
+        "about_us/",
+        cache_page(settings.ABOUT_PAGE_CACHE_SECOND)(AboutPageView.as_view()),
+        name="about_us",
+    ),
     path("contacts/", ContactPageView.as_view(), name="contacts"),
     path("admin/", admin.site.urls),
 ]

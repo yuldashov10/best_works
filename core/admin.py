@@ -1,6 +1,13 @@
 from django.contrib import admin
 
-from core.models import Address, Company, Contact, OpeningHour, SocialNetwork
+from core.models import (
+    About,
+    Address,
+    Company,
+    Contact,
+    OpeningHour,
+    SocialNetwork,
+)
 
 
 @admin.register(Contact)
@@ -61,7 +68,23 @@ class SocialNetworkAdmin(admin.ModelAdmin):
     list_display = ("name", "url", "icon_class", "company")
     list_display_links = ("name",)
     list_filter = ("company",)
-    fields = ("company", "name", "url", "icon_class")
+    fields = ("company", "name", "url", "icon_class", "style_class")
+
+
+@admin.register(About)
+class AboutAdmin(admin.ModelAdmin):
+    list_display = ("image_alt_text",)
+    list_display_links = ("image_alt_text",)
+    fields = (
+        "image",
+        "main_text",
+        "sub_text",
+        "alt_text",
+    )
 
 
 admin.site.empty_value_display = "Не указано"
+
+admin.site.index_title = "BEST WORKS"
+admin.site.site_header = "BEST WORKS | Админ-панель"
+admin.site.site_title = "Управление"
