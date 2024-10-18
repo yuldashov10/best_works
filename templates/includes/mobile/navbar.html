@@ -1,19 +1,14 @@
-<nav class="uk-navbar-container">
+<nav class="uk-navbar-container" uk-sticky="start: 200; animation: uk-animation-slide-top; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; cls-inactive: uk-navbar-transparent uk-light">
   <div class="uk-container uk-background-secondary">
     <div uk-navbar class="uk-hidden@m">
       <div class="uk-navbar-left">
         <ul class="uk-navbar-nav">
-          <li class="uk-text-warning">
-            <a href="#" class="uk-text-primary" uk-icon="icon: telegram"></a>
-          </li>
-          <li class="">
-            <a href="#" class="uk-text-success" uk-icon="icon: whatsapp"></a>
-          </li>
+          {% include 'includes/social_networks.html' %}
         </ul>
       </div>
       <div class="uk-navbar-center">
         <a class="uk-logo uk-text-bold uk-text-uppercase uk-text-warning uk-text-bottom"
-           href="{% url 'works:home_page' %}">Best Works</a>
+           href="{% url 'works:home_page' %}">{{ company.name|upper }}</a>
       </div>
       <div class="uk-navbar-right">
         <a class="uk-button  uk-button-small uk-margin-small-right"
@@ -48,15 +43,10 @@
       </li>
     </ul>
     <ul class="uk-navbar-nav">
-      <li class="">
-        <a href="#" class="uk-text-emphasis" uk-icon="icon: receiver"></a>
+      <li>
+        <a href="tel:{{ company.phone }}" class="uk-text-emphasis" uk-icon="icon: receiver"></a>
       </li>
-      <li class="uk-text-warning">
-        <a href="#" class="uk-text-primary" uk-icon="icon: telegram"></a>
-      </li>
-      <li class="">
-        <a href="#" class="uk-text-success" uk-icon="icon: whatsapp"></a>
-      </li>
+      {% include 'includes/social_networks.html' %}
     </ul>
   </div>
 </div>

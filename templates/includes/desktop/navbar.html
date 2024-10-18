@@ -26,20 +26,15 @@
           <div class="uk-navbar-center">
             <div class="uk-panel uk-padding uk-background-secondary">
               <a class="uk-logo uk-text-middle uk-text-uppercase uk-text-warning"
-                 href="{% url 'works:home_page' %}">Best Works</a>
+                 href="{% url 'works:home_page' %}">{{ company.name|upper }}</a>
             </div>
           </div>
           <div class="uk-navbar-right">
             <ul class="uk-navbar-nav">
               <li class="">
-                <a href="#" class="uk-text-emphasis" uk-icon="icon: receiver"></a>
+                <a href="tel:{{ company.phone }}" class="uk-text-emphasis" uk-icon="icon: receiver"></a>
               </li>
-              <li class="uk-text-warning">
-                <a href="#" class="uk-text-primary" uk-icon="icon: telegram"></a>
-              </li>
-              <li class="">
-                <a href="#" class="uk-text-success" uk-icon="icon: whatsapp"></a>
-              </li>
+              {% include 'includes/social_networks.html' %}
             </ul>
           </div>
         </div>

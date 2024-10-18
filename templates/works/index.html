@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
   <div class="uk-block"
        uk-parallax="blur: 5; sepia: 50;"
@@ -7,7 +8,7 @@
     <div class="uk-child-width uk-text-center uk-hidden@s" uk-grid>
       <div class="uk-animation-toggle " tabindex="0">
         <img class="uk-animation-stroke uk-animation"
-             src="static/svg/strokes.svg"
+             src="{% static 'svg/strokes.svg' %}"
              width="300"
              height="300"
              alt="bulldozer"
@@ -17,7 +18,7 @@
     <div class="uk-child-width uk-text-center uk-visible@s" uk-grid>
       <div class="uk-animation-toggle" tabindex="0">
         <img class="uk-animation-stroke uk-animation"
-             src="static/svg/strokes.svg"
+             src="{% static 'svg/strokes.svg' %}"
              width="300"
              height="300"
              alt="bulldozer"

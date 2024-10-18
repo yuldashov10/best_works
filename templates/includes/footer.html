@@ -18,27 +18,27 @@
           </li>
         </ul>
       </div>
-      <div>
+            <div>
         <h4 class="uk-heading-bullet uk-text-capitalize">Контакты</h4>
         <p>
           <a href="{% url 'contacts' %}#onTheMap"
              class="uk-icon-button"
-             uk-icon="location"></a> г.Иваново, ул.Смирнова, д.21
+             uk-icon="location"></a>{{ address }}
         </p>
         <p class="uk-margin-top">
-          <a href="mailto:support@best-works.ru"
+          <a href="mailto:{{company.email}}"
              class="uk-icon-button"
              uk-icon="mail"
-             role="img"></a> support@best-works.ru
+             role="img"></a>{{ company.email }}
         </p>
         <p>
-          <a href="tel:+71234567890"
+          <a href="tel:{{ company.phone }}"
              class="uk-icon-button"
              uk-icon="phone"
-             role="img"></a> +71234567890
+             role="img"></a> {{ company.phone }}
         </p>
         <p>
-          <a class="uk-icon-button" uk-icon="clock" role="img"></a> Пн-Пт 9:00 - 18:00
+          <a class="uk-icon-button" uk-icon="clock" role="img"></a>{{ opening_hours }}
         </p>
       </div>
     </div>
@@ -46,7 +46,7 @@
 </footer>
 <div class="uk-section uk-section-secondary uk-text-center uk-padding-small uk-margin-remove">
   <div class="uk-container">
-    <p class="uk-text-small">&copy; {% now "Y" %} Best Works. Все права защищены</p>
+    <p class="uk-text-small">&copy; {% now "Y" %} {{ company.name|upper }}. Все права защищены.</p>
     <p class="uk-margin-remove-top uk-text-meta">
       <a href="https://t.me/shyuldashov/" class="uk-link-muted">Made with
         <span class="uk-icon uk-text-danger" uk-icon="heart"></span> Shoxrux Yuldashov

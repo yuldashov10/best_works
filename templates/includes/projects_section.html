@@ -2,46 +2,18 @@
      tabindex="-1"
      uk-slider="center: true; autoplay: true; autoplay-interval: 3000; pause-on-hover: true">
   <div class="uk-slider-items uk-grid">
+
+    {% for slide in slides %}
     <div class="uk-width-3-4">
       <div class="uk-panel">
-        <img src="https://dummyimage.com/1280x720/b06023/43444f.png"
+        <img src="{{ slide.url }}"
              width="95%"
              height="50%"
-             alt="">
+             alt="{{ slide.alt_text }}">
       </div>
     </div>
-    <div class="uk-width-3-4">
-      <div class="uk-panel">
-        <img src="https://dummyimage.com/1280x720/b06023/43444f.png"
-             width="95%"
-             height="50%"
-             alt="">
-      </div>
-    </div>
-    <div class="uk-width-3-4">
-      <div class="uk-panel">
-        <img src="https://dummyimage.com/1280x720/b06023/43444f.png"
-             width="95%"
-             height="50%"
-             alt="">
-      </div>
-    </div>
-    <div class="uk-width-3-4">
-      <div class="uk-panel">
-        <img src="https://dummyimage.com/1280x720/b06023/43444f.png"
-             width="95%"
-             height="50%"
-             alt="">
-      </div>
-    </div>
-    <div class="uk-width-3-4">
-      <div class="uk-panel">
-        <img src="https://dummyimage.com/1280x720/b06023/43444f.png"
-             width="95%"
-             height="50%"
-             alt="">
-      </div>
-    </div>
+    {% endfor %}
+
   </div>
   <a class="uk-position-center-left uk-position-small uk-hidden-hover"
      href
