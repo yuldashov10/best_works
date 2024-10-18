@@ -1,8 +1,7 @@
 {% for social_network in social_networks %}
-<li>
-  <a href="{{ social_network.url }}"
-     class="{% if social_network.style_class %}{{ social_network.style_class }}{% else %}uk-text-muted{% endif %}"
-     uk-icon="icon: {{ social_network.icon_class }}">
-  </a>
-</li>
+  <li>
+    <a href="{{ social_network.url }}"
+       class="{% if social_network.style_class %}{{ social_network.style_class }}{% else %}uk-text-muted{% endif %}"
+       uk-icon="icon: {{ social_network.icon_class }}"></a>
+  </li>
 {% endfor %}

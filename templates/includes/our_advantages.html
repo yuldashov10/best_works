@@ -7,16 +7,14 @@
 <div class="uk-child-width-1-2@m"
      uk-grid
      uk-scrollspy="cls: uk-animation-fade; target: .uk-card; delay: 250; repeat: true">
-
   {% for advantage in advantages %}
-  <div>
-    <div class="uk-card uk-card-default uk-card-body">
-      <h3 class="uk-card-title">
-        <span uk-icon="{{ advantage.icon_class }}"></span> {{ advantage.title }}
-      </h3>
-      <p>{{ advantage.description }}</p>
+    <div>
+      <div class="uk-card uk-card-default uk-card-body">
+        <h3 class="uk-card-title">
+          <span uk-icon="{{ advantage.icon_class }}"></span> {{ advantage.title }}
+        </h3>
+        <p>{{ advantage.description }}</p>
+      </div>
     </div>
-  </div>
   {% endfor %}
-
 </div>

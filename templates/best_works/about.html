@@ -18,49 +18,40 @@
           </div>
         </div>
         <div>
-          <p class="uk-text-lead">
-            {{ about_us.main_text }}
-          </p>
-          <p>
-            {{ about_us.sub_text }}
-          </p>
+          <p class="uk-text-lead">{{ about_us.main_text }}</p>
+          <p>{{ about_us.sub_text }}</p>
         </div>
       </div>
       <h3 class="uk-heading-bullet">Наша команда</h3>
       <div class="uk-grid-match uk-child-width-1-3@m uk-text-center"
            uk-grid
            uk-scrollspy="cls: uk-animation-scale-up; target: .uk-card; delay: 150;">
-
         {% for employee in employees %}
-        <div>
-          <div class="uk-card uk-card-default uk-card-body">
-            <img class="uk-border-circle"
-                 width="120"
-                 height="120"
-                 src="{{ employee.avatar.url }}"
-                 alt="{{ employee.avatar_alt_text }}">
-            <h4 class="uk-card-title">{{ employee.full_name }}</h4>
-            <p>{{ employee.position }}</p>
+          <div>
+            <div class="uk-card uk-card-default uk-card-body">
+              <img class="uk-border-circle"
+                   width="120"
+                   height="120"
+                   src="{{ employee.avatar.url }}"
+                   alt="{{ employee.avatar_alt_text }}">
+              <h4 class="uk-card-title">{{ employee.full_name }}</h4>
+              <p>{{ employee.position }}</p>
+            </div>
           </div>
-        </div>
         {% endfor %}
-
       </div>
-
       <h3 class="uk-heading-bullet">Наши достижения</h3>
       <div class="uk-grid-match uk-child-width-1-3@m uk-text-center"
            uk-grid
            uk-scrollspy="cls: uk-animation-scale-down; target: .uk-card; delay: 200; repeat: true;">
-
         {% for achievement in achievements %}
-        <div>
-          <div class="uk-card uk-card-default uk-card-body">
-            <h4 class="uk-card-title">{{ achievement.title }}</h4>
-            <p>{{ achievement.description }}</p>
+          <div>
+            <div class="uk-card uk-card-default uk-card-body">
+              <h4 class="uk-card-title">{{ achievement.title }}</h4>
+              <p>{{ achievement.description }}</p>
+            </div>
           </div>
-        </div>
         {% endfor %}
-
       </div>
     </div>
   </div>

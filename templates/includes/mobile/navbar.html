@@ -1,4 +1,5 @@
-<nav class="uk-navbar-container" uk-sticky="start: 200; animation: uk-animation-slide-top; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; cls-inactive: uk-navbar-transparent uk-light">
+<nav class="uk-navbar-container"
+     uk-sticky="start: 200; animation: uk-animation-slide-top; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; cls-inactive: uk-navbar-transparent uk-secondary">
   <div class="uk-container uk-background-secondary">
     <div uk-navbar class="uk-hidden@m">
       <div class="uk-navbar-left">
@@ -44,7 +45,9 @@
     </ul>
     <ul class="uk-navbar-nav">
       <li>
-        <a href="tel:{{ company.phone }}" class="uk-text-emphasis" uk-icon="icon: receiver"></a>
+        <a href="tel:{{ company.phone }}"
+           class="uk-text-emphasis"
+           uk-icon="icon: receiver"></a>
       </li>
       {% include 'includes/social_networks.html' %}
     </ul>
