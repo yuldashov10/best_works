@@ -1,4 +1,6 @@
+import os
 from pathlib import Path
+from typing import Any
 
 from decouple import Csv, config
 from django.core.management.utils import get_random_secret_key
@@ -118,3 +120,71 @@ ABOUT_PAGE_CACHE_SECOND: int = 1800
 HOME_PAGE_CACHE_SECOND: int = 600
 
 SECRET_CIPHER_KEY: str = config("SECRET_CIPHER_KEY", cast=str)
+
+LOGGING: dict[str, Any] = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "{levelname} {asctime} {module} {message}",
+            "style": "{",
+        },
+        "simple": {
+            "format": "{levelname} {message}",
+            "style": "{",
+        },
+    },
+    "filters": {
+        "require_debug_false": {
+            "()": "django.utils.log.RequireDebugFalse",
+        },
+    },
+    "handlers": {
+        "file": {
+            "level": "INFO",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(BASE_DIR, "logs", "django.log"),
+            "formatter": "verbose",
+        },
+        "errors": {
+            "level": "ERROR",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(BASE_DIR, "logs", "errors.log"),
+            "formatter": "verbose",
+        },
+        "mail_admins": {
+            "level": "ERROR",
+            "class": "django.utils.log.AdminEmailHandler",
+            "filters": ["require_debug_false"],
+            "formatter": "verbose",
+        },
+        "telegram_errors": {
+            "level": "ERROR",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(BASE_DIR, "logs", "telegram_errors.log"),
+            "formatter": "verbose",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["file"],
+            "level": "ERROR",
+            "propagate": False,
+        },
+        "django.request": {
+            "handlers": ["mail_admins"],
+            "level": "ERROR",
+            "propagate": True,
+        },
+        "best_works": {
+            "handlers": ["errors"],
+            "level": "WARNING",
+            "propagate": False,
+        },
+        "telegram": {
+            "handlers": ["telegram_errors"],
+            "level": "ERROR",
+            "propagate": False,
+        },
+    },
+}

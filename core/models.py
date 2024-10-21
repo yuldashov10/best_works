@@ -33,6 +33,11 @@ class Contact(CreatedAtAndUpdatedAtMixin):
         "Ваше Имя",
         max_length=USER_NAME_LEN,
     )
+    phone_number = models.CharField(
+        "Ваш номер телефона",
+        max_length=COMPANY_PHONE_NUMBER_LEN,
+        validators=[PhoneNumberRussianFormatValidator()],
+    )
     email = models.EmailField(
         "Ваш адрес электронной почты",
     )

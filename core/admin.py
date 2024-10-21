@@ -12,10 +12,10 @@ from core.models import (
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ("name", "email", "created_at")
+    list_display = ("name", "phone_number", "email", "created_at")
     list_display_links = ("name",)
-    search_fields = ("email", "name", "text")
-    fields = ("name", "email", "text")
+    search_fields = ("email", "name", "text", "phone_number")
+    fields = ("name", "phone_number", "email", "text")
 
 
 @admin.register(Company)

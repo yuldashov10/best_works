@@ -1,7 +1,8 @@
 from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.template.response import TemplateResponse
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
@@ -45,7 +46,9 @@ class ContactPageView(SuccessMessageMixin, CreateView):
 class BadRequestView(TemplateView):
     template_name = "errors/400.html"
 
-    def render_to_response(self, context, **response_kwargs):
+    def render_to_response(
+        self, context, **response_kwargs
+    ) -> TemplateResponse:
         response_kwargs["status"] = 400
         return super().render_to_response(context, **response_kwargs)
 
@@ -53,7 +56,9 @@ class BadRequestView(TemplateView):
 class CsrfFailureView(TemplateView):
     template_name = "errors/403.html"
 
-    def render_to_response(self, context, **response_kwargs):
+    def render_to_response(
+        self, context, **response_kwargs
+    ) -> TemplateResponse:
         response_kwargs["status"] = 403
         return super().render_to_response(context, **response_kwargs)
 
@@ -61,11 +66,13 @@ class CsrfFailureView(TemplateView):
 class PageNotFoundView(TemplateView):
     template_name = "errors/404.html"
 
-    def render_to_response(self, context, **response_kwargs):
+    def render_to_response(
+        self, context, **response_kwargs
+    ) -> TemplateResponse:
         response_kwargs["status"] = 404
         return super().render_to_response(context, **response_kwargs)
 
 
-def internal_server_error(request, *args, **argv):
+def internal_server_error(request, *args, **kwargs) -> HttpResponse:
     template_name: str = "errors/500.html"
     return render(request, template_name, status=500)
