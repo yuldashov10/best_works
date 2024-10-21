@@ -21,9 +21,9 @@ INSTALLED_APPS = [
 ]
 
 PROJECT_APPS = [
-    "core",
-    "works",
-    "telegram",
+    "core.apps.CoreConfig",
+    "works.apps.WorksConfig",
+    "telegram.apps.TelegramConfig",
 ]
 
 INSTALLED_APPS += PROJECT_APPS
@@ -61,7 +61,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "best_works.wsgi.application"
 
-
 DATABASES = {
     "default": {
         "ENGINE": config("DB_ENGINE", cast=str),
@@ -87,7 +86,6 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
-
 
 LANGUAGE_CODE = "ru-Ru"
 TIME_ZONE = "Europe/Moscow"
@@ -118,3 +116,5 @@ CACHES = {
 CONTEXT_DATA_CACHE_TIME_SECOND: int = 900
 ABOUT_PAGE_CACHE_SECOND: int = 1800
 HOME_PAGE_CACHE_SECOND: int = 600
+
+SECRET_CIPHER_KEY: str = config("SECRET_CIPHER_KEY", cast=str)

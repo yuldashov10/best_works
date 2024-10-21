@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
@@ -31,10 +32,14 @@ class AboutPageView(TemplateView):
 class ContactPageView(SuccessMessageMixin, CreateView):
     form_class = ContactForm
     template_name = "best_works/contacts.html"
-    success_url = reverse_lazy("contact")
+    success_url = reverse_lazy("contacts")
     success_message = (
         "Спасибо за Ваше сообщение! Мы свяжемся с Вами в ближайшее время"
     )
+
+    def form_valid(self, form) -> HttpResponseRedirect:
+        response = super().form_valid(form)
+        return response
 
 
 class BadRequestView(TemplateView):

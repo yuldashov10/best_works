@@ -22,6 +22,13 @@ dj-dump:
 	python manage.py dumpdata core.OpeningHour > data/openingHour.json
 	python manage.py dumpdata core.SocialNetwork > data/socialNetwork.json
 	python manage.py dumpdata core.Company > data/company.json
+	python manage.py dumpdata core.About > data/about.json
+	python manage.py dumpdata works.Achievement > data/achievements.json
+	python manage.py dumpdata works.Position > data/positions.json
+	python manage.py dumpdata works.Employee > data/employees.json
+	python manage.py dumpdata works.Review > data/reviews.json
+	python manage.py dumpdata works.Advantage > data/advantages.json
+	python manage.py dumpdata works.Service > data/services.json
 
 
 # Commands for working with a virtual environment
