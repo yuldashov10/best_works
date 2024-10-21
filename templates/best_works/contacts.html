@@ -19,18 +19,15 @@
       {% endif %}
       <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="uk-margin">
-          <label class="uk-form-label" for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
-          <div class="uk-form-controls">{{ form.name }}</div>
-        </div>
-        <div class="uk-margin">
-          <label class="uk-form-label" for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
-          <div class="uk-form-controls">{{ form.email }}</div>
-        </div>
-        <div class="uk-margin">
-          <label class="uk-form-label" for="{{ form.text.id_for_label }}">{{ form.text.label }}</label>
-          <div class="uk-form-controls">{{ form.text }}</div>
-        </div>
+        {% if form.non_field_errors %}
+          <div class="uk-alert-danger" uk-alert>
+            <a class="uk-alert-close" uk-close></a>
+            <ul>
+              {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+        {% include 'includes/contacts/contact_form_fields.html' %}
         <div class="uk-margin">
           <button class="uk-button uk-button-secondary" type="submit">Отправить сообщение</button>
         </div>

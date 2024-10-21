@@ -1,0 +1,44 @@
+<div class="uk-margin">
+  <label class="uk-form-label" for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
+  <div class="uk-form-controls">{{ form.name }}</div>
+  {% if form.name.errors %}
+    <div class="uk-text-danger">
+      <ul>
+        {% for error in form.name.errors %}<li>{{ error }}</li>{% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+</div>
+<div class="uk-margin">
+  <label class="uk-form-label" for="{{ form.phone_number.id_for_label }}">{{ form.phone_number.label }}</label>
+  <div class="uk-form-controls">{{ form.phone_number }}</div>
+  {% if form.phone_number.errors %}
+    <div class="uk-text-danger">
+      <ul>
+        {% for error in form.phone_number.errors %}<li>{{ error }}</li>{% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+</div>
+<div class="uk-margin">
+  <label class="uk-form-label" for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+  <div class="uk-form-controls">{{ form.email }}</div>
+  {% if form.email.errors %}
+    <div class="uk-text-danger">
+      <ul>
+        {% for error in form.email.errors %}<li>{{ error }}</li>{% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+</div>
+<div class="uk-margin">
+  <label class="uk-form-label" for="{{ form.text.id_for_label }}">{{ form.text.label }}</label>
+  <div class="uk-form-controls">{{ form.text }}</div>
+  {% if form.text.errors %}
+    <div class="uk-text-danger">
+      <ul>
+        {% for error in form.text.errors %}<li>{{ error }}</li>{% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+</div>
