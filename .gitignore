@@ -3,7 +3,10 @@
 #########################
 **/migrations/*
 !**/migrations/__init__.py
-static/
+static/*
+!static/favicon.png
+!static/svg/
+
 staticfiles/
 cache_data/
 logs/
