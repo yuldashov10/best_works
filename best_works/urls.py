@@ -2,22 +2,29 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
+from django.views.decorators.cache import cache_page
+
+from core.views import (
+    AboutPageView,
+    BadRequestView,
+    ContactPageView,
+    CsrfFailureView,
+    PageNotFoundView,
+)
 
 urlpatterns = [
-    path(
-        "jet/",
-        include(
-            "jet.urls",
-            "jet",
-        ),
-    ),
+    path("jet/", include("jet.urls", "jet")),
     path(
         "jet/dashboard/",
-        include(
-            "jet.dashboard.urls",
-            "jet-dashboard",
-        ),
+        include("jet.dashboard.urls", "jet-dashboard"),
     ),
+    path("", include("works.urls", namespace="works")),
+    path(
+        "about_us/",
+        cache_page(settings.ABOUT_PAGE_CACHE_SECOND)(AboutPageView.as_view()),
+        name="about_us",
+    ),
+    path("contacts/", ContactPageView.as_view(), name="contacts"),
     path("admin/", admin.site.urls),
 ]
 if settings.DEBUG:
@@ -30,6 +37,7 @@ if settings.DEBUG:
         document_root=settings.STATIC_ROOT,
     )
 
-# handler404 = "views.func_name_for_404"
-# handler403 = "views.func_name_for_403"
-# handler500 = "views.func_name_for_500"
+handler400 = BadRequestView.as_view()
+handler403 = CsrfFailureView.as_view()
+handler404 = PageNotFoundView.as_view()
+handler500 = "core.views.internal_server_error"

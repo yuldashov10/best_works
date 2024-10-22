@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+<title>
+  {% block title %}Best Works | О Нас{% endblock %}
+</title>
+{% block content %}
+  <div class="uk-section uk-section-default">
+    <div class="uk-container">
+      <h2 class="uk-heading-line">
+        <span>Наши услуги</span>
+      </h2>
+      <div class="uk-grid-match uk-child-width-1-2@m uk-text-center"
+           uk-grid
+           uk-scrollspy="cls: uk-animation-scale-up; target: .uk-card; delay: 150; repeat: true">
+        {% for service in services %}
+          <div>
+            <div class="uk-card uk-card-default uk-card-body">
+              <img src="{{ service.preview.url }}"
+                   alt="{{ service.preview_alt_text }}"
+                   class="uk-margin-bottom">
+              <h3 class="uk-card-title">{{ service.title }}</h3>
+              <p>{{ service.description }}</p>
+              <a href="tel:{{ company.phone }}" class="uk-button uk-button-secondary">Получить консультацию</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

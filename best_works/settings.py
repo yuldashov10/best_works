@@ -1,4 +1,6 @@
+import os
 from pathlib import Path
+from typing import Any
 
 from decouple import Csv, config
 from django.core.management.utils import get_random_secret_key
@@ -17,10 +19,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "easy_thumbnails",
 ]
 
 PROJECT_APPS = [
-    #
+    "core.apps.CoreConfig",
+    "works.apps.WorksConfig",
+    "telegram.apps.TelegramConfig",
 ]
 
 INSTALLED_APPS += PROJECT_APPS
@@ -50,6 +55,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "core.context_processors.get_all_data_about_company",
             ],
         },
     },
@@ -57,16 +63,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "best_works.wsgi.application"
 
-
 DATABASES = {
     "default": {
         "ENGINE": config("DB_ENGINE", cast=str),
-        "NAME": config("DB_NAME", cast=str),
-        "USER": config("DB_USER", cast=str),
-        "PASSWORD": config("DB_PASSWORD", cast=str),
-        "HOST": config("DB_HOST", cast=str),
-        "PORT": config("DB_PORT", cast=int),
-    }
+        "NAME": BASE_DIR / config("DB_NAME", cast=str),
+    },
 }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -84,11 +85,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 LANGUAGE_CODE = "ru-Ru"
 TIME_ZONE = "Europe/Moscow"
 USE_I18N = True
 USE_TZ = True
+
+TIME_INPUT_FORMATS = ("%H:%M",)
 
 STATIC_URL = "static/"
 
@@ -101,3 +103,84 @@ MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": BASE_DIR / "cache_data",
+    }
+}
+
+CONTEXT_DATA_CACHE_TIME_SECOND: int = 900
+ABOUT_PAGE_CACHE_SECOND: int = 1800
+HOME_PAGE_CACHE_SECOND: int = 600
+
+SECRET_CIPHER_KEY: str = config("SECRET_CIPHER_KEY", cast=str)
+
+LOGGING: dict[str, Any] = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "{levelname} {asctime} {module} {message}",
+            "style": "{",
+        },
+        "simple": {
+            "format": "{levelname} {message}",
+            "style": "{",
+        },
+    },
+    "filters": {
+        "require_debug_false": {
+            "()": "django.utils.log.RequireDebugFalse",
+        },
+    },
+    "handlers": {
+        "file": {
+            "level": "INFO",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(BASE_DIR, "logs", "django.log"),
+            "formatter": "verbose",
+        },
+        "errors": {
+            "level": "ERROR",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(BASE_DIR, "logs", "errors.log"),
+            "formatter": "verbose",
+        },
+        "mail_admins": {
+            "level": "ERROR",
+            "class": "django.utils.log.AdminEmailHandler",
+            "filters": ["require_debug_false"],
+            "formatter": "verbose",
+        },
+        "telegram_errors": {
+            "level": "ERROR",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(BASE_DIR, "logs", "telegram_errors.log"),
+            "formatter": "verbose",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["file"],
+            "level": "ERROR",
+            "propagate": False,
+        },
+        "django.request": {
+            "handlers": ["mail_admins"],
+            "level": "ERROR",
+            "propagate": True,
+        },
+        "best_works": {
+            "handlers": ["errors"],
+            "level": "WARNING",
+            "propagate": False,
+        },
+        "telegram": {
+            "handlers": ["telegram_errors"],
+            "level": "ERROR",
+            "propagate": False,
+        },
+    },
+}

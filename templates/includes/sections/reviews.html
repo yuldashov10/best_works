@@ -1,0 +1,36 @@
+<h2 class="uk-heading-line uk-text-center uk-hidden@s">
+  <span>Наши клиенты говорят</span>
+</h2>
+<h2 class="uk-heading-line uk-text-center uk-heading-large uk-visible@s">
+  <span>Наши клиенты говорят</span>
+</h2>
+<div class="uk-position-relative uk-visible-toggle uk-light"
+     tabindex="-1"
+     uk-slider="autoplay: true; autoplay-interval: 3000">
+  <ul class="uk-slider-items uk-child-width-1-2@s uk-grid">
+    {% for review in reviews %}
+      <li>
+        <div class="uk-card uk-card-default">
+          <div class="uk-card-header">
+            <div class="uk-grid-small uk-flex-middle" uk-grid>
+              <div class="uk-width-auto">
+                <img class="uk-border-circle"
+                     width="60"
+                     height="60"
+                     src="{{ review.author_avatar.url }}"
+                     alt="{{ review.author_avatar_alt_text }}">
+              </div>
+              <div class="uk-width-expand">
+                <h3 class="uk-card-title uk-margin-remove-bottom">{{ review.author }}</h3>
+                <p class="uk-margin-remove-top">{{ review.created_at }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="uk-card-body">
+            <p>{{ review.text }}</p>
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+</div>

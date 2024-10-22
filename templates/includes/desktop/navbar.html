@@ -1,0 +1,46 @@
+<div class="uk-position-relative">
+  <div class="uk-position-top">
+    <nav class="uk-navbar-container uk-navbar-transparent">
+      <div class="uk-container">
+        <div uk-navbar class="uk-visible@m uk-text-bolder">
+          <div class="uk-navbar-left">
+            <ul class="uk-navbar-nav">
+              {% url 'works:home_page' as url %}
+              <li class="{% if request.path == url %}uk-active{% endif %}">
+                <a href="{% url 'works:home_page' %}">Главная {{ url_name }}</a>
+              </li>
+              {% url 'about_us' as url %}
+              <li class="{% if request.path == url %}uk-active{% endif %}">
+                <a href="{% url 'about_us' %}">О Нас</a>
+              </li>
+              {% url 'works:services' as url %}
+              <li class="{% if request.path == url %}uk-active{% endif %}">
+                <a href="{% url 'works:services' %}">Услуги</a>
+              </li>
+              {% url 'contacts' as url %}
+              <li class="{% if request.path == url %}uk-active{% endif %}">
+                <a href="{% url 'contacts' %}">Контакты</a>
+              </li>
+            </ul>
+          </div>
+          <div class="uk-navbar-center">
+            <div class="uk-panel uk-padding uk-background-secondary">
+              <a class="uk-logo uk-text-middle uk-text-uppercase uk-text-warning"
+                 href="{% url 'works:home_page' %}">{{ company.name|upper }}</a>
+            </div>
+          </div>
+          <div class="uk-navbar-right">
+            <ul class="uk-navbar-nav">
+              <li class="">
+                <a href="tel:{{ company.phone }}"
+                   class="uk-text-emphasis"
+                   uk-icon="icon: receiver"></a>
+              </li>
+              {% include 'includes/social_networks.html' %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>
