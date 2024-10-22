@@ -11,6 +11,23 @@ from core.constants import (
     CITY_NAME_LEN,
     COMPANY_NAME_LEN,
     COMPANY_PHONE_NUMBER_LEN,
+    META_TAG_AUTHOR_HELP_TEXT,
+    META_TAG_DESCRIPTION_HELP_TEXT,
+    META_TAG_KEYWORDS_HELP_TEXT,
+    META_TAG_OG_DESCRIPTION_HELP_TEXT,
+    META_TAG_OG_IMAGE_HELP_TEXT,
+    META_TAG_OG_TITLE_HELP_TEXT,
+    META_TAG_OG_TYPE_HELP_TEXT,
+    META_TAG_OG_URL_HELP_TEXT,
+    META_TAG_ROBOTS_HELP_TEXT,
+    META_TAG_TWITTER_CARD_HELP_TEXT,
+    META_TAG_TWITTER_DESCRIPTION_HELP_TEXT,
+    META_TAG_TWITTER_IMAGE_HELP_TEXT,
+    META_TAG_TWITTER_TITLE_HELP_TEXT,
+    META_TAGS_AUTHOR_LEN,
+    META_TAGS_DEFAULT_LEN,
+    META_TAGS_IMAGE_URL_LEN,
+    META_TAGS_ROBOTS_LEN,
     NULL_BLANK,
     SOCIAL_NETWORK_CHOICES,
     SOCIAL_NETWORK_ICON_CLASS_LEN,
@@ -80,17 +97,22 @@ class Company(models.Model):
         related_name="company",
         verbose_name="Часы работы компании",
     )
-
-    constraints = [
-        models.UniqueConstraint(
-            fields=("city", "street", "build"),
-            name="invalid_company_phone_unique",
-        )
-    ]
+    meta_tags = models.OneToOneField(
+        "WebsiteMetaTag",
+        on_delete=models.CASCADE,
+        **NULL_BLANK,
+        verbose_name="Мета теги",
+    )
 
     class Meta:
         verbose_name = "О компании"
         verbose_name_plural = "О компании"
+        constraints = [
+            models.UniqueConstraint(
+                fields=("name", "address"),
+                name="invalid_company_address",
+            )
+        ]
 
     def __str__(self) -> str:
         return str(self.name)
@@ -244,3 +266,81 @@ class About(AltTextForImageMixin):
 
     def __str__(self) -> str:
         return f"О нас информация #{self.pk}"
+
+
+class WebsiteMetaTag(models.Model):
+    description = models.CharField(
+        "Описание сайта",
+        max_length=META_TAGS_DEFAULT_LEN,
+        help_text=META_TAG_DESCRIPTION_HELP_TEXT,
+    )
+    keywords = models.CharField(
+        "Ключевые слова",
+        max_length=META_TAGS_DEFAULT_LEN,
+        help_text=META_TAG_KEYWORDS_HELP_TEXT,
+    )
+    robots = models.CharField(
+        "Индексация",
+        max_length=META_TAGS_ROBOTS_LEN,
+        default="index, follow",
+        help_text=META_TAG_ROBOTS_HELP_TEXT,
+    )
+    author = models.CharField(
+        "Автор сайта",
+        max_length=META_TAGS_AUTHOR_LEN,
+        help_text=META_TAG_AUTHOR_HELP_TEXT,
+    )
+    og_title = models.CharField(
+        "Заголовок для социальных сетей",
+        max_length=META_TAGS_DEFAULT_LEN,
+        help_text=META_TAG_OG_TITLE_HELP_TEXT,
+    )
+    og_description = models.CharField(
+        "Описание для социальных сетей",
+        max_length=META_TAGS_DEFAULT_LEN,
+        help_text=META_TAG_OG_DESCRIPTION_HELP_TEXT,
+    )
+    og_image = models.URLField(
+        "Изображение для соц. сетей",
+        max_length=META_TAGS_IMAGE_URL_LEN,
+        help_text=META_TAG_OG_IMAGE_HELP_TEXT,
+    )
+    og_url = models.URLField(
+        "URL для соц. сетей",
+        max_length=META_TAGS_IMAGE_URL_LEN,
+        help_text=META_TAG_OG_URL_HELP_TEXT,
+    )
+    og_type = models.CharField(
+        "Тип контента",
+        max_length=META_TAGS_ROBOTS_LEN,
+        default="website",
+        help_text=META_TAG_OG_TYPE_HELP_TEXT,
+    )
+    twitter_card = models.CharField(
+        "Тип X карточки",
+        max_length=META_TAGS_ROBOTS_LEN,
+        help_text=META_TAG_TWITTER_CARD_HELP_TEXT,
+    )
+    twitter_title = models.CharField(
+        "Заголовок для X",
+        max_length=META_TAGS_DEFAULT_LEN,
+        help_text=META_TAG_TWITTER_TITLE_HELP_TEXT,
+    )
+    twitter_description = models.CharField(
+        "Описание для X",
+        max_length=META_TAGS_DEFAULT_LEN,
+        help_text=META_TAG_TWITTER_DESCRIPTION_HELP_TEXT,
+    )
+    twitter_image = models.URLField(
+        "Изображение для X",
+        max_length=META_TAGS_IMAGE_URL_LEN,
+        help_text=META_TAG_TWITTER_IMAGE_HELP_TEXT,
+    )
+
+    class Meta:
+        verbose_name = "Мета-тег"
+        verbose_name_plural = "Мета-теги"
+        ordering = ("-pk",)
+
+    def __str__(self):
+        return f"Мета-тег #{self.pk}"

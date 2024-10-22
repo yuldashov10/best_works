@@ -30,6 +30,8 @@ dj-dump:
 	python manage.py dumpdata works.Advantage > data/advantages.json
 	python manage.py dumpdata works.Service > data/services.json
 
+dj-upload:
+	python manage.py upload_data
 
 # Commands for working with a virtual environment
 venv310:

@@ -5,7 +5,6 @@
 !**/migrations/__init__.py
 static/
 staticfiles/
-data/
 cache_data/
 logs/
 

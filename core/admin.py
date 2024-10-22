@@ -7,6 +7,7 @@ from core.models import (
     Contact,
     OpeningHour,
     SocialNetwork,
+    WebsiteMetaTag,
 )
 
 
@@ -35,6 +36,7 @@ class CompanyAdmin(admin.ModelAdmin):
         "email",
         "address",
         "opening_hours",
+        "meta_tags",
     )
 
     def get_full_address(self, obj) -> str:
@@ -80,6 +82,53 @@ class AboutAdmin(admin.ModelAdmin):
         "main_text",
         "sub_text",
         "alt_text",
+    )
+
+
+@admin.register(WebsiteMetaTag)
+class WebsiteMetaTagAdmin(admin.ModelAdmin):
+    list_display = (
+        "description",
+        "keywords",
+        "author",
+        "og_title",
+        "twitter_title",
+    )
+    search_fields = (
+        "description",
+        "keywords",
+        "author",
+        "og_title",
+        "twitter_title",
+    )
+    fieldsets = (
+        (
+            "Основное",
+            {"fields": ("description", "keywords", "robots", "author")},
+        ),
+        (
+            "Настройки Open Graph",
+            {
+                "fields": (
+                    "og_title",
+                    "og_description",
+                    "og_image",
+                    "og_url",
+                    "og_type",
+                )
+            },
+        ),
+        (
+            "Настройки X (экс Twitter)",
+            {
+                "fields": (
+                    "twitter_card",
+                    "twitter_title",
+                    "twitter_description",
+                    "twitter_image",
+                )
+            },
+        ),
     )
 
 
