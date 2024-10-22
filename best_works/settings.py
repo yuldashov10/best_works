@@ -66,12 +66,8 @@ WSGI_APPLICATION = "best_works.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": config("DB_ENGINE", cast=str),
-        "NAME": config("DB_NAME", cast=str),
-        "USER": config("DB_USER", cast=str),
-        "PASSWORD": config("DB_PASSWORD", cast=str),
-        "HOST": config("DB_HOST", cast=str),
-        "PORT": config("DB_PORT", cast=int),
-    }
+        "NAME": BASE_DIR / config("DB_NAME", cast=str),
+    },
 }
 
 AUTH_PASSWORD_VALIDATORS = [

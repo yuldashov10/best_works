@@ -47,16 +47,16 @@ from core.validators import (
 
 class Contact(CreatedAtAndUpdatedAtMixin):
     name = models.CharField(
-        "Ваше Имя",
+        "Имя",
         max_length=USER_NAME_LEN,
     )
     phone_number = models.CharField(
-        "Ваш номер телефона",
+        "Номер телефона",
         max_length=COMPANY_PHONE_NUMBER_LEN,
         validators=[PhoneNumberRussianFormatValidator()],
     )
     email = models.EmailField(
-        "Ваш адрес электронной почты",
+        "Адрес электронной почты",
     )
     text = models.TextField(
         "Сообщение",

@@ -65,3 +65,10 @@ test:
 
 # Full check (formatting, linting, tests)
 check: format lint test
+
+
+# Other utils
+
+pre-deploy:
+	mkdir cache_data
+	mkdir logs
